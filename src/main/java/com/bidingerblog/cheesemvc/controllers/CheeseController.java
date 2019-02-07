@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("cheese")
@@ -37,4 +39,21 @@ public class CheeseController {
         //Redirect to /cheese
         return "redirect:";
     }
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String displayDeleteCheeseForm(Model model) {
+        model.addAttribute("cheeses", cheeses);
+        model.addAttribute("title", "Delete Cheese");
+        return "cheese/delete";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteCheeseForm(@RequestParam ArrayList<String> cheese){
+            for (String dcheese : cheese){
+                cheeses.remove(dcheese);
+            }
+            return "redirect:";
+
+
+    }
+
 }

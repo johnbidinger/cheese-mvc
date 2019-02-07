@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head ">
+</head>
+<body>
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<form method="post" >
+    <th:block th:each="cheese : ${cheeses}">
+        <input type="checkbox" name="cheese"  th:value="${cheese.key}"
+               th:text="${cheese.key}" onchange="document.getElementById('delete').disabled = !this.checked;" /><br>
+    </th:block>
+    <input type="submit" value="Delete Selected" id="delete" disabled>
+</form>
+
+
+
+</body>
+</html>
