@@ -47,8 +47,11 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String processDeleteCheeseForm(@RequestParam ArrayList<String> cheese){
-            for (String dcheese : cheese){
+    public String processDeleteCheeseForm(@RequestParam (value = "cheese", required = false)ArrayList<String> cheese){
+        if (cheese == null){
+            return "redirect:";
+        }
+        for (String dcheese : cheese){
                 cheeses.remove(dcheese);
             }
             return "redirect:";
